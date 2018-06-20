@@ -9,15 +9,20 @@
          <v-btn large router to="/meetup/new" class="info">Organize Meetup</v-btn>
        </v-flex>
      </v-layout>
-
+    <v-layout v-if="loading">
+      <v-flex xs12 class="text-xs-center">
+         <v-progress-circular  :size="70" :width="7" indeterminate color="purple"></v-progress-circular>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex xs-12>
-        <v-carousel>
+        <v-carousel v-if="!loading">
           <v-carousel-item
             v-for="meetup in meetups"
             :src="meetup.imageUrl"
             :key="meetup.id"
-            style="cursor: pointer;">
+            style="cursor: pointer;"
+            >
             <div class="title" @click="onLoadMeetup(meetup.id)">
               {{ meetup.title }}
             </div>
@@ -43,6 +48,9 @@
     computed: {
       meetups() {
         return this.$store.getters.featuredMeetups
+      },
+      loading() {
+        return this.$store.getters.loading
       }
     },
 

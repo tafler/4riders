@@ -40,7 +40,7 @@
 
 <script>
     export default {
-      name: "Meetups",
+      name: 'Meetups',
       computed: {
         meetups () {
           return this.$store.getters.loadedMeetups

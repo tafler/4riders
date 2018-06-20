@@ -7,6 +7,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import { value } from '../apiKey'
 import { store } from './store'
+import AlertCmp from './components/Shared/Alert'
 import 'vuetify/dist/vuetify.min.css'
 import DateFilter from './filters/date'
 
@@ -23,6 +24,7 @@ Vue.use(Vuetify, { theme: {
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
+Vue.component('app-alert', AlertCmp)
 
 /* eslint-disable no-new */
 new Vue({
@@ -39,5 +41,12 @@ new Vue({
       projectId: 'riders-99582',
       storageBucket: 'riders-99582.appspot.com',
     })
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadMeetups')
+
   }
 })
