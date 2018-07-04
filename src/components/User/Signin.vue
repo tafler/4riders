@@ -59,9 +59,9 @@
 
 <script>
   export default {
-    name: "Signup",
+    name: 'Signup',
     data() {
-      return{
+      return {
         email: '',
         password: ''
       }
@@ -79,7 +79,7 @@
     },
     watch: {
       user (value) {
-        if(value !== null && value !== undefined) {
+        if( value !== null && value !== undefined ) {
           this.$router.push('/')
         }
       }
@@ -87,7 +87,6 @@
     methods: {
       onSignin() {
         this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
-
       },
       onDismissed() {
         this.$store.dispatch('clearError')

@@ -7,9 +7,9 @@
 
 <script>
     export default {
-      name: "Alert",
+      name: 'Alert',
       props: ['text'],
-      methods:{
+      methods: {
           onClose() {
             this.$emit('dismissed')
           },

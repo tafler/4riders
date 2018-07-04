@@ -10,6 +10,7 @@ import { store } from './store'
 import AlertCmp from './components/Shared/Alert'
 import 'vuetify/dist/vuetify.min.css'
 import DateFilter from './filters/date'
+import EditMeetpDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog'
 
 Vue.use(Vuetify, { theme: {
   primary: '#e3aa8a',
@@ -25,6 +26,7 @@ Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertCmp)
+Vue.component('app-edit-meetup-details-dialog', EditMeetpDetailsDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -39,14 +41,13 @@ new Vue({
       authDomain: 'riders-99582.firebaseapp.com',
       databaseURL: 'https://riders-99582.firebaseio.com',
       projectId: 'riders-99582',
-      storageBucket: 'riders-99582.appspot.com',
+      storageBucket: 'gs://riders-99582.appspot.com'
     })
     firebase.auth().onAuthStateChanged(user => {
-      if(user) {
+      if (user) {
         this.$store.dispatch('autoSignIn', user)
       }
     })
     this.$store.dispatch('loadMeetups')
-
   }
 })

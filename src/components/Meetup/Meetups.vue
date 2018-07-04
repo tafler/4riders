@@ -39,13 +39,14 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
     export default {
       name: 'Meetups',
       computed: {
         meetups () {
           return this.$store.getters.loadedMeetups
         }
-      }
+      },
     }
 </script>
 

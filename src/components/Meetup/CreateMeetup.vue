@@ -32,13 +32,12 @@
         </v-layout>
         <v-layout row>
           <v-flex x12 sm6 offset-sm3>
-            <v-text-field
-              name="imageUrl"
-              label="Image URL"
-              id="imageUrl"
-              v-model="imageUrl"
-              requierd
-            ></v-text-field>
+            <v-btn raised class="primary" @click="onPickFile">Upload Image</v-btn>
+            <input  type="file" 
+                    style="display: none" 
+                    ref="fileInput" 
+                    accept="image/*"
+                    @change="onFilePicked">
           </v-flex>
         </v-layout>
         <v-layout row>
@@ -89,7 +88,7 @@
 
 <script>
     export default {
-      name: "CreateMeetup",
+      name: 'CreateMeetup',
       data() {
         return {
           title: '',
@@ -97,7 +96,8 @@
           imageUrl: '',
           description: '',
           date: '',
-          time: new Date()
+          time: new Date(),
+          image: null
         }
       },
       mounted() {
@@ -112,7 +112,7 @@
         },
         submittableDateTime () {
           const date = new Date(this.date)
-          if(typeof(this.time) === 'string'){
+          if( typeof(this.time) === 'string' ){
             const hours = this.time.match(/^(\d+)/)[1]
             const minutes = this.time.match(/:(\d+)/)[1]
             date.setHours(hours)
@@ -126,19 +126,38 @@
       },
       methods: {
         onCreateMeetup() {
-          if(!this.formIsValid){
+          if(!this.formIsValid) {
+            return
+          };
+          if(!this.image) {
             return
           }
           const meetupData = {
             title : this.title,
             location : this.location,
             description: this.description,
-            imageUrl: this.imageUrl,
-            date: this.submittableDateTime,
+            image: this.image,
+            date: this.submittableDateTime
             // id: this.id
+          };
+          this.$store.dispatch('createMeetup', meetupData);
+          this.$router.push('/meetups');
+        },
+        onPickFile() {
+          this.$refs.fileInput.click();
+        },
+        onFilePicked(event) {
+          const files = event.target.files;
+          let filename = files[0].name;
+          if(filename.lastIndexOf('.') <= 0){
+            return alert('please add aa valid file!')
           }
-          this.$store.dispatch('createMeetup', meetupData)
-          this.$router.push('/meetups')
+          const fileReader = new FileReader()
+          fileReader.addEventListener('load', () => {
+            this.imageUrl = fileReader.result
+          })
+          fileReader.readAsDataURL(files[0])
+          this.image = files[0]
         }
       }
     }
