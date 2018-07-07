@@ -13,6 +13,7 @@ import DateFilter from './filters/date'
 import EditMeetpDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog'
 import EditMeetpDateDialog from './components/Meetup/Edit/EditMeetupDateDialog'
 import EditMeetpTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog'
+import RegisterDialog from './components/Meetup/Registration/RegisterDialog'
 
 Vue.use(Vuetify, { theme: {
   primary: '#e3aa8a',
@@ -31,6 +32,7 @@ Vue.component('app-alert', AlertCmp)
 Vue.component('app-edit-meetup-details-dialog', EditMeetpDetailsDialog)
 Vue.component('app-edit-meetup-date-dialog', EditMeetpDateDialog)
 Vue.component('app-edit-meetup-time-dialog', EditMeetpTimeDialog)
+Vue.component('app-meetup-register-dialog', RegisterDialog)
 
 /* eslint-disable no-new */
 new Vue({

@@ -41,6 +41,11 @@
                       >
             
             </app-edit-meetup-time-dialog>
+            <app-meetup-register-dialog 
+                    :meetupId="meetup.id"
+                      >
+            
+            </app-meetup-register-dialog>
           </div>
           <div>{{ meetup.description}}</div>
         </v-card-text>
