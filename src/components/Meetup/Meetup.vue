@@ -43,6 +43,7 @@
             </app-edit-meetup-time-dialog>
             <app-meetup-register-dialog 
                     :meetupId="meetup.id"
+                    v-if="userIsAuthenticated && !userIsCreator"
                       >
             
             </app-meetup-register-dialog>
